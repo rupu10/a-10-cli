@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const AddRecipe = () => {
     const [selected, setSelected] = useState("");
@@ -14,6 +15,7 @@ const AddRecipe = () => {
         if (selected === 'dinner') categories = 'dinner';
     else if (selected === 'break') categories= 'breakfast';
     else if (selected === 'lunch')categories = 'lunch';
+    else if(selected === 'others') categories = 'others'
 
     const form = e.target;
     const title = form.title.value;
@@ -23,9 +25,26 @@ const AddRecipe = () => {
     const instructions = form.instruction.value;
     const preparationTime = form.time.value;
     
-    const newRecipe = {title,cuisineType,image,ingredients,instructions,preparationTime,categories
-}
+    const newRecipe = {title,cuisineType,image,ingredients,instructions,preparationTime,categories}
     console.log(newRecipe);
+
+    fetch("http://localhost:7500/recipes",{
+        method: 'POST',
+        headers: {
+            'Content-type' : "application/json"
+        },
+        body: JSON.stringify(newRecipe)
+    })
+    .then(res => res.json())
+    .then((data)=>{
+        if(data.insertedId){
+            Swal.fire({
+  title: "Drag me!",
+  icon: "success",
+  draggable: true
+});
+        }
+    })
 
 
     // const formData = new FormData(form);
@@ -99,25 +118,25 @@ const AddRecipe = () => {
               placeholder="Preparation time (minute)" 
             />
           </fieldset>
-          <fieldset className="fieldset w-full rounded-box flex" name="meal">
+          <fieldset className="fieldset w-full rounded-box flex" name="categories">
             <legend className="">category</legend>
             <label className="label">
-                <input type="checkbox" name="meal" checked={selected === 'dinner'} 
+                <input type="checkbox" name="categories" checked={selected === 'dinner'} 
                 onChange={()=> handleChange('dinner')}
                 />dinner
             </label>
             <label className="label">
-                <input type="checkbox" name="meal" checked={selected === 'break'} 
+                <input type="checkbox" name="categories" checked={selected === 'break'} 
                 onChange={()=> handleChange('break')}
                  />break Fast
             </label>
             <label className="label">
-                <input type="checkbox" name="meal" checked={selected === 'lunch'} 
+                <input type="checkbox" name="categories" checked={selected === 'lunch'} 
                 onChange={()=> handleChange('lunch')}
                  />lunch
             </label>
             <label className="label">
-                <input type="checkbox" name="meal" checked={selected === 'others'} 
+                <input type="checkbox" name="categories" checked={selected === 'others'} 
                 onChange={()=> handleChange('others')}
                  />Others
             </label>
