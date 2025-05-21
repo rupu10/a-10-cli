@@ -36,7 +36,7 @@ const Slider = () => {
                 <img
             src={slideC}
             alt="Slide 1"
-            className="w-full max-h-[700px]"
+            className="w-full md:min-h-[480px]"
           />
             </SwiperSlide>
 
