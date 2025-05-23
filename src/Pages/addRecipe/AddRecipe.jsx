@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../context/AuthContext";
 
 const AddRecipe = () => {
     const [selected, setSelected] = useState("");
@@ -7,6 +8,8 @@ const AddRecipe = () => {
         setSelected(selected === value? "": value)
     }
 
+    const {user} = use(AuthContext);
+    // console.log(user.email);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -24,8 +27,10 @@ const AddRecipe = () => {
     const ingredients = form.ingredients.value;
     const instructions = form.instruction.value;
     const preparationTime = form.time.value;
+
+    const user_email = user.email;
     
-    const newRecipe = {title,cuisineType,image,ingredients,instructions,preparationTime,categories}
+    const newRecipe = {title,cuisineType,image,ingredients,instructions,preparationTime,categories,user_email}
     console.log(newRecipe);
 
     fetch("http://localhost:7500/recipes",{

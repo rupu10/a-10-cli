@@ -1,11 +1,12 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
 
-const CardDetails = () => {
+const MyRecipeCardDetails = () => {
     const data = useLoaderData();
     console.log(data);
     return (
-        <div className='w-10/12 mx-auto'>
+        <div>
+            <div className='w-10/12 mx-auto'>
             <h1 className='text-center text-4xl font-semibold mb-6'>{data.title}</h1>
             <div>
                 <img src={data.image} alt="" />
@@ -19,8 +20,8 @@ const CardDetails = () => {
                 <button className='btn'>like</button>
             </div>
         </div>
+        </div>
     );
-    
 };
 
-export default CardDetails;
+export default MyRecipeCardDetails;

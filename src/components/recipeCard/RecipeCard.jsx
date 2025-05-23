@@ -17,8 +17,8 @@ const RecipeCard = ({ recipe }) => {
           <h2 className="card-title">{title}</h2>
           <p className="">Cuisine Type: {cuisineType}</p>
           <p>Liked by {likeCount} people</p>
-          <div className="card-actions justify-end">
-            <button onClick={()=> navigate(`/recipeDetails/${_id}`)} className="px-3 py-2 border border-yellow-600 rounded-3xl bg-yellow-400 font-semibold text-base hover:bg-white hover:text-yellow-600 cursor-pointer">
+          <div className="card-actions">
+            <button onClick={()=> navigate(`/recipeDetails/${_id}`)} className="px-3 py-2 border w-full border-yellow-600 rounded-3xl bg-yellow-400 font-semibold text-base hover:bg-white hover:text-yellow-600 cursor-pointer">
               View Details
             </button>
           </div>
