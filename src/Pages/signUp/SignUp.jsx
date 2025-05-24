@@ -2,6 +2,7 @@ import React, { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
 import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser,createUserWithGmail } = use(AuthContext);
@@ -16,6 +17,15 @@ const SignUp = () => {
     const password = formData.get("password");
     const photo = formData.get('photo')
 
+    const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (passwordRegExp.test(password) === false) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must be at least 6 characters long and include both uppercase and lowercase letters.",
+      });
+    }
+
     createUser(email, password)
       .then((res) => {
         return updateProfile(res.user,{
@@ -29,6 +39,7 @@ const SignUp = () => {
       .catch((err) => {
         console.log(err);
       });
+      
   };
 
   const handleGoogleReg = () => {

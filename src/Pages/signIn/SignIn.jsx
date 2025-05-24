@@ -1,41 +1,51 @@
 import React, { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, useLocation, useNavigate } from "react-router";
+import Swal from "sweetalert2";
 
 const SignIn = () => {
+  const { setReload, logInUser, googleSignIn } = use(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  console.log(location);
 
-    const {setReload,logInUser,googleSignIn} = use(AuthContext)
-    const location = useLocation();
-    const navigate = useNavigate();
-    console.log(location);
-
-    const handleLogin =(e)=>{
-        e.preventDefault();
-        const form = e.target;
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const form = e.target;
     const formData = new FormData(form);
     const email = formData.get("email");
     const password = formData.get("password");
 
-
-    logInUser(email,password)
-    .then(res=> {
-      console.log(res)
-      navigate(location?.state || "/")
-    })
-    .catch(err=>{
-      setReload(false)
-      console.log(err)
-    })
+    const passwordRegExp = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+    if (passwordRegExp.test(password) === false) {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Password must be at least 6 characters long and include both uppercase and lowercase letters.",
+      });
     }
 
-    const handleGoogleLogin =()=>{
-        googleSignIn()
-        .then(res=>{
-          console.log(res)
-          navigate(location?.state || "/");
-        })
-        .catch(err=>console.log(err))
-    }
+    logInUser(email, password)
+      .then((res) => {
+        console.log(res);
+        navigate(location?.state || "/");
+      })
+      .catch((err) => {
+        setReload(false);
+        console.log(err);
+      });
+
+    
+  };
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+      .then((res) => {
+        console.log(res);
+        navigate(location?.state || "/");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
@@ -46,7 +56,12 @@ const SignIn = () => {
               <h1 className="text-5xl font-bold">Sign in now</h1>
               <form onSubmit={handleLogin} className="fieldset">
                 <label className="label">Email</label>
-                <input type="email" name="email" className="input" placeholder="Email" />
+                <input
+                  type="email"
+                  name="email"
+                  className="input"
+                  placeholder="Email"
+                />
                 <label className="label">Password</label>
                 <input
                   type="password"
@@ -55,10 +70,18 @@ const SignIn = () => {
                   name="password"
                 />
                 <div>
-                  <p className="">Don't have an account?<Link to='/signUp' className="text-blue-500 underline">please sign up</Link></p>
+                  <p className="">
+                    Don't have an account?
+                    <Link to="/signUp" className="text-blue-500 underline">
+                      please sign up
+                    </Link>
+                  </p>
                 </div>
                 <button className="btn btn-neutral mt-4">sign in</button>
-                <button onClick={handleGoogleLogin} className="btn bg-white text-black border-[#e5e5e5]">
+                <button
+                  onClick={handleGoogleLogin}
+                  className="btn bg-white text-black border-[#e5e5e5]"
+                >
                   <svg
                     aria-label="Google logo"
                     width="16"
