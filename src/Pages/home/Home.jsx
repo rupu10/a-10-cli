@@ -1,5 +1,5 @@
-import React, { use, useState } from 'react';
-import { useLoaderData, useNavigate } from 'react-router';
+import React, { use } from 'react';
+import { useNavigate } from 'react-router';
 import Slider from '../../components/slider/Slider';
 import RecipeCard from '../../components/recipeCard/RecipeCard';
 import { AuthContext } from '../../context/AuthContext';

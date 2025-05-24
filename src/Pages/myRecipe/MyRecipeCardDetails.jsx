@@ -1,11 +1,14 @@
-import React from 'react';
-import { useLoaderData } from 'react-router';
+import React, { use } from 'react';
+import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../context/AuthContext';
 
 const MyRecipeCardDetails = () => {
     const data = useLoaderData();
+    const {setReload} = use(AuthContext)
+    const navigate = useNavigate();
     // console.log(data);
-    const handleDelete = (id) => {
+    const handleDelete = (id,email) => {
         console.log(id);
         Swal.fire({
             title: "Are you sure?",
@@ -17,11 +20,22 @@ const MyRecipeCardDetails = () => {
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your file has been deleted.",
-                icon: "success"
-              });
+                fetch(`http://localhost:7500/recipes/${id}`,{
+                    method: 'DELETE'
+                } )
+                .then(res=>res.json())
+                .then(data=> {
+                    if(data.deletedCount){
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your recipe has been deleted.",
+                            icon: "success"
+                          });
+                          setReload((prev) => !prev);
+                          navigate(`/myRecipe/${email}`)
+                    }
+                })
+              
             }
           });
     }
@@ -38,7 +52,7 @@ const MyRecipeCardDetails = () => {
                 <h1 className='text-lg'>Food Category: {data.categories}</h1>
             </div>
             <div className='flex justify-end mt-4'>
-                <button onClick={()=>handleDelete(data._id)} className='btn'>delete</button>
+                <button onClick={()=>handleDelete(data._id,data.user_email)} className='btn'>delete</button>
             </div>
         </div>
         </div>
