@@ -8,10 +8,6 @@ import { FaMoon } from "react-icons/fa";
 import TypeWrite from "../../components/TypeWrite";
 
 const Home = () => {
-  // const initialRecipe = useLoaderData();
-  // const [recipes, setRecipes] = useState(initialRecipe)
-
-  // const {recipes, setRecipes} = use(AuthContext)
 
   const [darkMode, setDarkMode] = useState(false);
   const [recipes, setTopRecipes] = useState([]);
