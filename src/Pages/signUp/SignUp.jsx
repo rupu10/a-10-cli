@@ -1,9 +1,12 @@
 import React, { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const { createUser,createUserWithGmail } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -11,10 +14,17 @@ const SignUp = () => {
     const formData = new FormData(form);
     const email = formData.get("email");
     const password = formData.get("password");
+    const photo = formData.get('photo')
 
     createUser(email, password)
       .then((res) => {
-        console.log(res.user);
+        return updateProfile(res.user,{
+          photoURL: photo
+        });
+      })
+      .then(res=>{
+        console.log(res)
+        navigate(location?.state || "/")
       })
       .catch((err) => {
         console.log(err);
@@ -46,6 +56,13 @@ const SignUp = () => {
                   className="input"
                   placeholder="Password"
                   name="password"
+                />
+                <label className="label">photo URL</label>
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="Photo URL"
+                  name="photo"
                 />
                 <div>
                   <Link to='/signIn'>Already have an account? <span className="text-blue-500 underline">sign in</span></Link>

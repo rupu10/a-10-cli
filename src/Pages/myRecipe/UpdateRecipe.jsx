@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
 const UpdateRecipe = () => {
-  const { user,setReload } = use(AuthContext);
+  const { user,reFetch } = use(AuthContext);
 
   const navigate = useNavigate();
   const {
@@ -53,7 +53,7 @@ const UpdateRecipe = () => {
     };
     // console.log(updateRecipe);
 
-    fetch(`http://localhost:7500/recipes/${_id}`, {
+    fetch(`https://a-10-server-flame.vercel.app/recipes/${_id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -63,7 +63,7 @@ const UpdateRecipe = () => {
     .then(res => res.json())
     .then(data => {
         if(data.modifiedCount){
-            
+            reFetch();
 
             Swal.fire({
                 position: "top-end",
@@ -73,7 +73,7 @@ const UpdateRecipe = () => {
                 timer: 1500
               });
               navigate(`/myRecipe/${user.email}`)
-              setReload((prev) => !prev);
+              
               
         }
     })

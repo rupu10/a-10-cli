@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     children: [
         {
             index: true,
-            loader: ()=> fetch('http://localhost:7500/recipes'),
+            loader: ()=> fetch('https://a-10-server-flame.vercel.app/recipes'),
             Component: Home
         },
         {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         },
         {
             path: '/recipeDetails/:id',
-            loader: ({params})=> fetch(`http://localhost:7500/recipes/${params.id}`),
+            loader: ({params})=> fetch(`https://a-10-server-flame.vercel.app/recipes/${params.id}`),
             element: <PrivateRoutes><CardDetails></CardDetails></PrivateRoutes>
         },
         {
@@ -40,17 +40,17 @@ const router = createBrowserRouter([
         },
         {
             path: '/myRecipe/:userEmail',
-            loader: ({params})=> fetch(`http://localhost:7500/recipe/myRecipe/${params.userEmail}`),
+            loader: ({params})=> fetch(`https://a-10-server-flame.vercel.app/recipe/myRecipe/${params.userEmail}`),
             element: <PrivateRoutes><MyRecipe></MyRecipe></PrivateRoutes> 
         },
         {
             path: '/myRecipeDetails/:userEmail/:id',
-            loader: ({params}) => fetch(`http://localhost:7500/recipe/myRecipe/${params.userEmail}/${params.id}`),
+            loader: ({params}) => fetch(`https://a-10-server-flame.vercel.app/recipe/myRecipe/${params.userEmail}/${params.id}`),
             element: <PrivateRoutes><MyRecipeCardDetails></MyRecipeCardDetails></PrivateRoutes>
         },
         {
             path: '/updateRecipe/:userEmail/:id',
-            loader: ({params}) => fetch(`http://localhost:7500/recipe/myRecipe/${params.userEmail}/${params.id}`),
+            loader: ({params}) => fetch(`https://a-10-server-flame.vercel.app/recipe/myRecipe/${params.userEmail}/${params.id}`),
             Component: UpdateRecipe
         },
         {

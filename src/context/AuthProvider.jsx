@@ -6,43 +6,55 @@ import { auth } from '../firebase.init';
 const AuthProvider = ({children}) => {
 
     const [recipes, setRecipes] = useState([])
-    const [reload, setReload] = useState(false)
+    const [reload, setReload] = useState(true)
 
     useEffect(()=>{
-        fetch('http://localhost:7500/recipes')
+        fetch('https://a-10-server-flame.vercel.app/recipes')
         .then(res=>res.json())
         .then(data=>setRecipes(data))
-    },[reload])
+    },[])
 
-    // console.log(recipes);
+    const reFetch =()=>{
+        fetch("https://a-10-server-flame.vercel.app/recipes")
+    .then(res => res.json())
+    .then(data => setRecipes(data));
+    }
+
+    console.log(recipes);
 
     const googleProvider = new GoogleAuthProvider();
 
     const [user, setUser] = useState(null)
 
     const createUser = (email,password) => {
+        setReload(true)
         return createUserWithEmailAndPassword(auth,email,password)
     }
 
     const createUserWithGmail = () => {
+        setReload(true)
         return signInWithPopup(auth, googleProvider)
     }
 
     const logInUser = (email,password) => {
+        setReload(true)
         return signInWithEmailAndPassword(auth,email,password)
     }
 
     const googleSignIn = () => {
+        setReload(true)
         return signInWithPopup(auth,googleProvider)
     }
 
     const signOutUser = () => {
+        setReload(true)
         return signOut(auth)
     }
 
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth,currentUser =>{
             setUser(currentUser);
+            setReload(false)
         })
         return ()=>{
             unSubscribe
@@ -60,7 +72,8 @@ const AuthProvider = ({children}) => {
         recipes,
         setRecipes,
         setReload,
-        reload
+        reload,
+        reFetch
     }
     return (
         <AuthContext value={userInfo}>

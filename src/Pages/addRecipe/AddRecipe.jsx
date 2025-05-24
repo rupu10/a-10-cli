@@ -10,7 +10,7 @@ const AddRecipe = () => {
   };
 
   const navigate = useNavigate();
-  const { user, setReload } = use(AuthContext);
+  const { user, reFetch } = use(AuthContext);
   // console.log(user.email);
 
   const handleSubmit = (e) => {
@@ -43,7 +43,7 @@ const AddRecipe = () => {
     };
     console.log(newRecipe);
 
-    fetch("http://localhost:7500/recipes", {
+    fetch("https://a-10-server-flame.vercel.app/recipes", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -59,7 +59,7 @@ const AddRecipe = () => {
             icon: "success",
             draggable: true,
           });
-          setReload((prev) => !prev);
+          reFetch();
           navigate(`/myRecipe/${user.email}`)
         }
       });

@@ -5,7 +5,7 @@ import { AuthContext } from '../../context/AuthContext';
 
 const MyRecipeCardDetails = () => {
     const data = useLoaderData();
-    const {setReload} = use(AuthContext)
+    const {reFetch} = use(AuthContext)
     const navigate = useNavigate();
     // console.log(data);
     const handleDelete = (id,email) => {
@@ -20,7 +20,7 @@ const MyRecipeCardDetails = () => {
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:7500/recipes/${id}`,{
+                fetch(`https://a-10-server-flame.vercel.app/recipes/${id}`,{
                     method: 'DELETE'
                 } )
                 .then(res=>res.json())
@@ -31,7 +31,7 @@ const MyRecipeCardDetails = () => {
                             text: "Your recipe has been deleted.",
                             icon: "success"
                           });
-                          setReload((prev) => !prev);
+                          reFetch();
                           navigate(`/myRecipe/${email}`)
                     }
                 })

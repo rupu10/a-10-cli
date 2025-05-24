@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 
 const SignIn = () => {
 
-    const {logInUser,googleSignIn} = use(AuthContext)
+    const {setReload,logInUser,googleSignIn} = use(AuthContext)
     const location = useLocation();
     const navigate = useNavigate();
     console.log(location);
@@ -22,7 +22,10 @@ const SignIn = () => {
       console.log(res)
       navigate(location?.state || "/")
     })
-    .catch(err=>console.log(err))
+    .catch(err=>{
+      setReload(false)
+      console.log(err)
+    })
     }
 
     const handleGoogleLogin =()=>{
