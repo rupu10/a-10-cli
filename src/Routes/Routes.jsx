@@ -12,13 +12,14 @@ import SignUp from "../Pages/signUp/SignUp";
 import MyRecipeCardDetails from "../Pages/myRecipe/MyRecipeCardDetails";
 import PrivateRoutes from "./PrivateRoutes";
 import UpdateRecipe from "../Pages/myRecipe/UpdateRecipe";
+import Error from "../components/Error";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
-    errorElement: <div>error!</div>,
+    errorElement: <Error></Error>,
     children: [
         {
             index: true,
