@@ -1,9 +1,13 @@
 import React, { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const SignIn = () => {
 
     const {logInUser,googleSignIn} = use(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+    console.log(location);
 
     const handleLogin =(e)=>{
         e.preventDefault();
@@ -12,11 +16,22 @@ const SignIn = () => {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    logInUser(email,password).then(res=> console.log(res)).catch(err=>console.log(err))
+
+    logInUser(email,password)
+    .then(res=> {
+      console.log(res)
+      navigate(location?.state || "/")
+    })
+    .catch(err=>console.log(err))
     }
 
     const handleGoogleLogin =()=>{
-        googleSignIn().then(res=>console.log(res)).catch(err=>console.log(err))
+        googleSignIn()
+        .then(res=>{
+          console.log(res)
+          navigate(location?.state || "/");
+        })
+        .catch(err=>console.log(err))
     }
 
   return (
@@ -26,17 +41,18 @@ const SignIn = () => {
           <div className="card bg-base-100 mx-auto max-w-sm shrink-0 shadow-2xl">
             <div className="card-body">
               <h1 className="text-5xl font-bold">Sign in now</h1>
-              <form onClick={handleLogin} className="fieldset">
+              <form onSubmit={handleLogin} className="fieldset">
                 <label className="label">Email</label>
-                <input type="email" className="input" placeholder="Email" />
+                <input type="email" name="email" className="input" placeholder="Email" />
                 <label className="label">Password</label>
                 <input
                   type="password"
                   className="input"
                   placeholder="Password"
+                  name="password"
                 />
                 <div>
-                  <a className="link link-hover">Forgot password?</a>
+                  <p className="">Don't have an account?<Link to='/signUp' className="text-blue-500 underline">please sign up</Link></p>
                 </div>
                 <button className="btn btn-neutral mt-4">sign in</button>
                 <button onClick={handleGoogleLogin} className="btn bg-white text-black border-[#e5e5e5]">

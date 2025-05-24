@@ -10,6 +10,8 @@ import CardDetails from "../Pages/recipeCardDetails/CardDetails";
 import SignIn from "../Pages/signIn/SignIn";
 import SignUp from "../Pages/signUp/SignUp";
 import MyRecipeCardDetails from "../Pages/myRecipe/MyRecipeCardDetails";
+import PrivateRoutes from "./PrivateRoutes";
+import UpdateRecipe from "../Pages/myRecipe/UpdateRecipe";
 
 
 const router = createBrowserRouter([
@@ -30,21 +32,26 @@ const router = createBrowserRouter([
         {
             path: '/recipeDetails/:id',
             loader: ({params})=> fetch(`http://localhost:7500/recipes/${params.id}`),
-            Component: CardDetails
+            element: <PrivateRoutes><CardDetails></CardDetails></PrivateRoutes>
         },
         {
             path: '/addRecipe',
-            Component: AddRecipe
+            element: <PrivateRoutes><AddRecipe></AddRecipe></PrivateRoutes> 
         },
         {
             path: '/myRecipe/:userEmail',
             loader: ({params})=> fetch(`http://localhost:7500/recipe/myRecipe/${params.userEmail}`),
-            Component: MyRecipe
+            element: <PrivateRoutes><MyRecipe></MyRecipe></PrivateRoutes> 
         },
         {
             path: '/myRecipeDetails/:userEmail/:id',
             loader: ({params}) => fetch(`http://localhost:7500/recipe/myRecipe/${params.userEmail}/${params.id}`),
-            Component: MyRecipeCardDetails
+            element: <PrivateRoutes><MyRecipeCardDetails></MyRecipeCardDetails></PrivateRoutes>
+        },
+        {
+            path: '/updateRecipe/:userEmail/:id',
+            loader: ({params}) => fetch(`http://localhost:7500/recipe/myRecipe/${params.userEmail}/${params.id}`),
+            Component: UpdateRecipe
         },
         {
             path: '/signIn',

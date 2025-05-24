@@ -19,10 +19,11 @@ return (
       <h2 className="card-title">{title}</h2>
       <p className="">Cuisine Type: {cuisineType}</p>
       <p>Liked by {likeCount} people</p>
-      <div className="card-actions justify-end">
+      <div className="card-actions grid grid-cols-2">
         <button onClick={()=> navigate(`/myRecipeDetails/${user.email}/${_id}`)}  className="px-3 py-2 border border-yellow-600 rounded-3xl bg-yellow-400 font-semibold text-base hover:bg-white hover:text-yellow-600 cursor-pointer">
           View Details
         </button>
+        <button onClick={()=> navigate(`/updateRecipe/${user.email}/${_id}`)} className="px-3 py-2 border border-yellow-600 rounded-3xl bg-yellow-400 font-semibold text-base hover:bg-white hover:text-yellow-600 cursor-pointer">Update recipe</button>
       </div>
     </div>
   </div>

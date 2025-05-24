@@ -3,37 +3,39 @@ import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
+  const { user, signOutUser } = use(AuthContext);
+  const handleSignOut = () => {
+    signOutUser()
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
-    const {user,signOutUser} = use(AuthContext);
-
-    const handleSignOut = () => {
-        signOutUser().then(res=>console.log(res)).catch(err=>console.log(err))
-    }
-
-    const links = <>
-    <li>
-                <NavLink to='/'>Home</NavLink>
-              </li>
-              <li>
-                <NavLink to='/allRecipes'>All Recipe</NavLink>
-              </li>
-              <li>
-                <NavLink to='/signin'>Log in</NavLink>
-              </li>
-              <li>
-                <NavLink to='/signup'>Register</NavLink>
-              </li>
-              {
-                user && <>
-                <li>
-                <NavLink to='/addRecipe'>Add a recipe</NavLink>
-              </li>
-              <li>
-                <NavLink to={`/myRecipe/${user.email}`}>My Recipe</NavLink>
-              </li>
-                </>
-              }
+  const links = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/allRecipes">All Recipe</NavLink>
+      </li>
+      {user ? <>
+          <li>
+            <NavLink to="/addRecipe">Add a recipe</NavLink>
+          </li>
+          <li>
+            <NavLink to={`/myRecipe/${user.email}`}>My Recipe</NavLink>
+          </li>
+        </>:
+        <>
+        <li>
+        <NavLink to="/signin">Log in</NavLink>
+      </li>
+      <li>
+        <NavLink to="/signup">Register</NavLink>
+      </li>
+        </>}
     </>
+  );
 
   return (
     <div>
@@ -64,21 +66,28 @@ const Navbar = () => {
               {links}
             </ul>
           </div>
-          <Link className="text-red-500 text-3xl font-bold">Recipe<span className="text-yellow-500">Books</span></Link>
+          <Link className="text-red-500 text-3xl font-bold">
+            Recipe<span className="text-yellow-500">Books</span>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-            {links}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{links}</ul>
         </div>
         <div className="navbar-end">
-          {
-            user? <>
-            <button className="btn" onClick={handleSignOut}>log out</button>
-            </>: <>
-            <Link className="btn" to='/signin'>log in</Link>
+          {user ? (
+            <>
+            <img className="w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-full mr-2 cursor-pointer" src={user.photoURL} alt="" />
+              <button className="btn" onClick={handleSignOut}>
+                log out
+              </button>
             </>
-          }
+          ) : (
+            <>
+              <Link className="btn" to="/signin">
+                log in
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </div>

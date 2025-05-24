@@ -1,5 +1,6 @@
 import React, { use } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router";
 
 const SignUp = () => {
   const { createUser,createUserWithGmail } = use(AuthContext);
@@ -47,7 +48,7 @@ const SignUp = () => {
                   name="password"
                 />
                 <div>
-                  <a className="link link-hover">Forgot password?</a>
+                  <Link to='/signIn'>Already have an account? <span className="text-blue-500 underline">sign in</span></Link>
                 </div>
                 <button className="btn btn-neutral mt-4">sign Up</button>
                 <button onClick={handleGoogleReg} className="btn bg-white text-black border-[#e5e5e5]">
