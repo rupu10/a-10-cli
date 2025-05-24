@@ -1,9 +1,30 @@
 import React from 'react';
 import { useLoaderData } from 'react-router';
+import Swal from 'sweetalert2';
 
 const MyRecipeCardDetails = () => {
     const data = useLoaderData();
-    console.log(data);
+    // console.log(data);
+    const handleDelete = (id) => {
+        console.log(id);
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your file has been deleted.",
+                icon: "success"
+              });
+            }
+          });
+    }
     return (
         <div>
             <div className='w-10/12 mx-auto'>
@@ -17,7 +38,7 @@ const MyRecipeCardDetails = () => {
                 <h1 className='text-lg'>Food Category: {data.categories}</h1>
             </div>
             <div className='flex justify-end mt-4'>
-                <button className='btn'>like</button>
+                <button onClick={()=>handleDelete(data._id)} className='btn'>delete</button>
             </div>
         </div>
         </div>

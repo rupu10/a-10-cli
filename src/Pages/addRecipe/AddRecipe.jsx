@@ -8,7 +8,7 @@ const AddRecipe = () => {
         setSelected(selected === value? "": value)
     }
 
-    const {user} = use(AuthContext);
+    const {user,setReload} = use(AuthContext);
     // console.log(user.email);
 
     const handleSubmit = e => {
@@ -48,6 +48,7 @@ const AddRecipe = () => {
   icon: "success",
   draggable: true
 });
+setReload(prev => !prev)
         }
     })
 

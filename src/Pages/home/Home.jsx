@@ -1,14 +1,18 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import Slider from '../../components/slider/Slider';
 import RecipeCard from '../../components/recipeCard/RecipeCard';
+import { AuthContext } from '../../context/AuthContext';
 
 const Home = () => {
+    // const initialRecipe = useLoaderData();
+    // const [recipes, setRecipes] = useState(initialRecipe)
+
+    const {recipes, setRecipes} = use(AuthContext)
 
     const navigate = useNavigate();
 
-    const initialRecipe = useLoaderData();
-    const [recipes, setRecipes] = useState(initialRecipe)
+
     return (
         <div className='py-4'>
             <div className='bg-red-900 pt-12 pb-9'>

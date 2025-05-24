@@ -5,6 +5,20 @@ import { auth } from '../firebase.init';
 
 const AuthProvider = ({children}) => {
 
+    // const data = useLoaderData();
+    // console.log(data);
+
+    const [recipes, setRecipes] = useState([])
+    const [reload, setReload] = useState(false)
+
+    useEffect(()=>{
+        fetch('http://localhost:7500/recipes')
+        .then(res=>res.json())
+        .then(data=>setRecipes(data))
+    },[reload])
+
+    console.log(recipes);
+
     const googleProvider = new GoogleAuthProvider();
 
     const [user, setUser] = useState(null)
@@ -45,7 +59,10 @@ const AuthProvider = ({children}) => {
         googleSignIn,
         signOutUser,
         user,
-        setUser
+        setUser,
+        recipes,
+        setRecipes,
+        setReload
     }
     return (
         <AuthContext value={userInfo}>
