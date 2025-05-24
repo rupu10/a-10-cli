@@ -9,14 +9,11 @@ const UpdateRecipe = () => {
   const navigate = useNavigate();
   const {
     _id,
-    user_email,
     title,
     preparationTime,
     instructions,
     ingredients,
     image,
-    cuisineType,
-    categories,
   } = useLoaderData();
   const [selected, setSelected] = useState("");
   const handleChange = (value) => {
@@ -93,6 +90,7 @@ const UpdateRecipe = () => {
                 <input
                   name="title"
                   type="text"
+                  value={title}
                   className="input w-full"
                   placeholder="Recipe Title"
                 />
@@ -112,6 +110,7 @@ const UpdateRecipe = () => {
                 <label className="label">Image URL</label>
                 <input
                   name="img"
+                  value={image}
                   type="text"
                   className="input w-full"
                   placeholder="Image URL"
@@ -124,6 +123,7 @@ const UpdateRecipe = () => {
                   type="text"
                   className="input w-full"
                   placeholder="ingredients"
+                  value={ingredients}
                 />
               </fieldset>
               <fieldset className="fieldset w-full rounded-box p-4">
@@ -131,6 +131,7 @@ const UpdateRecipe = () => {
                 <input
                   name="instruction"
                   type="text"
+                  value={instructions}
                   className="input w-full"
                   placeholder="instruction"
                 />
@@ -140,6 +141,7 @@ const UpdateRecipe = () => {
                 <input
                   name="time"
                   type="number"
+                  value={preparationTime}
                   className="input w-full"
                   placeholder="Preparation time (minute)"
                 />

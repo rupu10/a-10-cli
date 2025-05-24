@@ -5,6 +5,7 @@ import MyRecipeCard from './MyRecipeCard';
 
 const MyRecipe = () => {;
     const data = useLoaderData();
+    console.log(data);
     
     return (
         <div className='w-10/12 mx-auto '>

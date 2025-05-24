@@ -28,7 +28,7 @@ const AddRecipe = () => {
     const ingredients = form.ingredients.value;
     const instructions = form.instruction.value;
     const preparationTime = form.time.value;
-
+    const likeCount = 0;
     const user_email = user.email;
 
     const newRecipe = {
@@ -40,6 +40,7 @@ const AddRecipe = () => {
       preparationTime,
       categories,
       user_email,
+      likeCount
     };
     console.log(newRecipe);
 
