@@ -1,9 +1,22 @@
-import React, { use } from "react";
+import React, { use, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { user, signOutUser } = use(AuthContext);
+  const [showMenu,setShowMenu] = useState(false);
+  const menuRef = useRef();
+
+  useEffect(()=>{
+    const close = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+    document.addEventListener('click', close);
+    return () => document.removeEventListener('click', close);
+  },[])
+
   const handleSignOut = () => {
     signOutUser()
       .then((res) => console.log(res))
@@ -75,12 +88,21 @@ const Navbar = () => {
         </div>
         <div className="navbar-end">
           {user ? (
-            <>
-            <img className="w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-full mr-2 cursor-pointer" src={user.photoURL} alt="" />
-              <button className="btn" onClick={handleSignOut}>
+            <div className="relative" ref={menuRef}>
+            <img onClick={()=> setShowMenu(!showMenu)} className="w-[40px] h-[40px] md:w-[60px] md:h-[60px] rounded-full mr-2 cursor-pointer" src={user.photoURL} alt="" />
+            {showMenu && (<div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow p-2 z-50">
+                <p className="font-semibold">{user.displayName}</p>
+                <button
+                  onClick={handleSignOut}
+                  className="mt-2 px-3 w-full bg-red-700 rounded-3xl text-white text-xl font-semibold border border-red-700 hover:bg-white hover:text-red-700 cursor-pointer"
+                >
+                  Logout
+                </button>
+              </div>)}
+              {/* <button className="btn" onClick={handleSignOut}>
                 log out
-              </button>
-            </>
+              </button> */}
+            </div>
           ) : (
             <>
               <Link className="btn" to="/signin">

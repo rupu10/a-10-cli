@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router';
+import { GrLike } from "react-icons/gr";
 
 const CardDetails = () => {
     
     const data = useLoaderData();
 
-    console.log(data._id);
     const [likeCount,setLikeCount] = useState(data.likeCount)
     const handleLike = (id)=>{
         const newCount = likeCount + 1;
@@ -36,8 +36,8 @@ const CardDetails = () => {
                 <h1 className='text-lg'>Times you needed: {data.preparationTime} minute</h1>
                 <h1 className='text-lg'>Food Category: {data.categories}</h1>
             </div>
-            <div className='flex justify-end mt-4'>
-                <button onClick={()=>handleLike(data._id)} className='btn'>like</button>
+            <div className='flex justify-end my-4'>
+                <button onClick={()=>handleLike(data._id)} className='flex items-center gap-x-2 px-3 py-2 border border-yellow-600 rounded-3xl bg-yellow-400 font-semibold text-base hover:bg-white hover:text-yellow-600 cursor-pointer'><GrLike /> like</button>
             </div>
         </div>
     );

@@ -2,6 +2,8 @@ import React, { use } from 'react';
 import { useLoaderData, useNavigate } from 'react-router';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../context/AuthContext';
+import { MdDelete } from "react-icons/md";
+
 
 const MyRecipeCardDetails = () => {
     const data = useLoaderData();
@@ -52,7 +54,7 @@ const MyRecipeCardDetails = () => {
                 <h1 className='text-lg'>Food Category: {data.categories}</h1>
             </div>
             <div className='flex justify-end mt-4'>
-                <button onClick={()=>handleDelete(data._id,data.user_email)} className='btn'>delete</button>
+                <button onClick={()=>handleDelete(data._id,data.user_email)} className='flex items-center px-3 py-2 bg-red-700 rounded-3xl text-white text-xl font-semibold border border-red-700 hover:bg-white hover:text-red-700 cursor-pointer'><MdDelete size={20}/>delete</button>
             </div>
         </div>
         </div>

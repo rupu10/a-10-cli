@@ -9,7 +9,7 @@ const MainLayout = () => {
             <div className='w-10/12 mx-auto'>
                 <Navbar></Navbar>
             </div>
-            <div className='min-h-[calc(100vh-220px)] bg-gray-100 py-6'>
+            <div className='min-h-[calc(100vh-220px)] bg-gray-100'>
                 <Outlet></Outlet>
             </div>
             <div className=' bg-black'>
