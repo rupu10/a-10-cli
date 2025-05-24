@@ -65,9 +65,6 @@ const AddRecipe = () => {
         }
       });
 
-    // const formData = new FormData(form);
-    // const newRecipe = Object.fromEntries(formData.entries());
-    // console.log(newRecipe);
   };
 
   return (

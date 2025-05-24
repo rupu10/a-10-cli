@@ -99,9 +99,6 @@ const Navbar = () => {
                   Logout
                 </button>
               </div>)}
-              {/* <button className="btn" onClick={handleSignOut}>
-                log out
-              </button> */}
             </div>
           ) : (
             <>
