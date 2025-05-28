@@ -50,7 +50,7 @@ const UpdateRecipe = () => {
     };
     // console.log(updateRecipe);
 
-    fetch(`https://a-10-server-flame.vercel.app/recipes/${_id}`, {
+    fetch(`http://localhost:8800/recipes/${_id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",

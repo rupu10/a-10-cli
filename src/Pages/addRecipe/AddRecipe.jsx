@@ -44,7 +44,7 @@ const AddRecipe = () => {
     };
     console.log(newRecipe);
 
-    fetch("https://a-10-server-flame.vercel.app/recipes", {
+    fetch("http://localhost:8800/recipes", {
       method: "POST",
       headers: {
         "Content-type": "application/json",

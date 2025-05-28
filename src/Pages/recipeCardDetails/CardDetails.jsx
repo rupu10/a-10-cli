@@ -9,7 +9,7 @@ const CardDetails = () => {
     const [likeCount,setLikeCount] = useState(data.likeCount)
     const handleLike = (id)=>{
         const newCount = likeCount + 1;
-        fetch(`https://a-10-server-flame.vercel.app/recipes/${id}`,{
+        fetch(`http://localhost:8800/recipes/${id}`,{
             method: 'PATCH',
             headers: {
                 "Content-type": 'application/json',

@@ -13,7 +13,7 @@ const Home = () => {
   const [recipes, setTopRecipes] = useState([]);
 
   useEffect(() => {
-    fetch("https://a-10-server-flame.vercel.app/top-recipes")
+    fetch("http://localhost:8800/top-recipes")
       .then((res) => res.json())
       .then((data) => setTopRecipes(data));
   }, []);

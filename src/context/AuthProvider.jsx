@@ -9,13 +9,13 @@ const AuthProvider = ({children}) => {
     const [reload, setReload] = useState(true)
 
     useEffect(()=>{
-        fetch('https://a-10-server-flame.vercel.app/recipes')
+        fetch('http://localhost:8800/recipes')
         .then(res=>res.json())
         .then(data=>setRecipes(data))
     },[])
 
     const reFetch =()=>{
-        fetch("https://a-10-server-flame.vercel.app/recipes")
+        fetch("http://localhost:8800/recipes")
     .then(res => res.json())
     .then(data => setRecipes(data));
     }

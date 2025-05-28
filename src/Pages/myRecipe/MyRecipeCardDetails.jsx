@@ -22,7 +22,7 @@ const MyRecipeCardDetails = () => {
             confirmButtonText: "Yes, delete it!"
           }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`https://a-10-server-flame.vercel.app/recipes/${id}`,{
+                fetch(`http://localhost:8800/recipes/${id}`,{
                     method: 'DELETE'
                 } )
                 .then(res=>res.json())
