@@ -2,6 +2,10 @@
 
 A modern web application built with the MERN stack (MongoDB, Express, React, Node.js) featuring responsive design, smooth animations, and interactive UI components.
 
+##important links
+[Live Link](https://dashing-gingersnap-1d12ee.netlify.app/)
+[client-side repo](https://github.com/rupu10/a-10-cli)
+
 ## Features
 
 - **Fullstack Architecture**: MongoDB database with Express.js backend and React frontend
