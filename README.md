@@ -5,6 +5,7 @@ A modern web application built with the MERN stack (MongoDB, Express, React, Nod
 ## important links
 [Live Link](https://dashing-gingersnap-1d12ee.netlify.app/)
 [client-side repo](https://github.com/rupu10/a-10-cli)
+[server-side repo](https://github.com/rupu10/a-10-server)
 
 ## Features
 
