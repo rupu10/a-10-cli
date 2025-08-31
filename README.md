@@ -1,6 +1,4 @@
-# Project Name
-
-RECIPE BOOK
+# RECIPE BOOK
 
 A modern web application built with the MERN stack (MongoDB, Express, React, Node.js) featuring responsive design, smooth animations, and interactive UI components.
 
